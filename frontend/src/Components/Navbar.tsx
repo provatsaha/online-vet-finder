@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Menu, Home, User2, Phone, Briefcase, User } from "lucide-react";
+import { Menu, Home, User2, Phone, Briefcase } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
