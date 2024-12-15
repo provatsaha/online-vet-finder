@@ -2,7 +2,6 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -18,8 +17,6 @@ import {
 
 const app: Application = express();
 
-app.use(express.json());
-
 app.use(
 	cors({
 		origin: "*",
@@ -27,6 +24,9 @@ app.use(
 		allowedHeaders: ["Content-Type", "Authorization"],
 	})
 );
+
+app.use(express.json({ limit: "20mb" }));
+app.use(express.urlencoded({ limit: "20mb", extended: true }));
 
 app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Origin", "*");
@@ -40,15 +40,15 @@ app.use((req, res, next) => {
 
 app.use((req: Request, res: Response, next: NextFunction) => {
 	const contentLength = req.headers["content-length"];
-	console.log(`\x1b[36m${req.method} ${req.url}\x1b[0m`);
 	console.log(
-		`Payload Size: ${contentLength ? contentLength + " bytes" : "unknown"}`
+		`==> \x1b[33m${req.method} ${req.url}\x1b[0m` +
+			" " +
+			`\x1b[36mPayload Size: ${
+				contentLength ? contentLength + " bytes" : "unknown"
+			}\x1b[0m\n`
 	);
 	next();
 });
-
-app.use(express.json({ limit: "5mb" }));
-app.use(express.urlencoded({ limit: "5mb", extended: true }));
 
 const connectDB = async () => {
 	try {
