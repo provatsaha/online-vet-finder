@@ -7,6 +7,10 @@ import { Toaster } from "react-hot-toast";
 import Mypets from "./Components/Mypets/Mypets";
 import NewPet from "./Components/NewPet/NewPet";
 import EditPet from "./Components/EditPet/EditPet";
+import VetProfile from "./Components/VetProfile/VetProfile";
+import Manage from "./Components/VetProfile/Manage/Manage";
+import NewService from "./Components/VetProfile/Manage/NewService/NewService";
+import EditService from "./Components/VetProfile/Manage/EditService/EditService";
 
 const App = () => {
 	return (
@@ -19,6 +23,16 @@ const App = () => {
 				<Route path="/mypets" element={<Mypets />} />
 				<Route path="/newpet" element={<NewPet />} />
 				<Route path="/editpet/:id" element={<EditPet />} />
+				<Route path="/vet-profile" element={<VetProfile />} />
+				<Route path="/vet-profile/manage" element={<Manage />} />
+				<Route
+					path="/vet-profile/manage/new-service"
+					element={<NewService />}
+				/>
+				<Route
+					path="/vet-profile/manage/:id"
+					element={<EditService />}
+				/>
 			</Routes>
 		</Router>
 	);

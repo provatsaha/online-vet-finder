@@ -8,6 +8,13 @@ dotenv.config();
 import { getVetById, newVet } from "./controllers/vetController";
 import { signup, getProfileById } from "./controllers/userController";
 import {
+	deleteService,
+	editService,
+	getServiceById,
+	getServicesById,
+	newService,
+} from "./controllers/serviceController";
+import {
 	deletePetById,
 	editPet,
 	getPetById,
@@ -69,6 +76,12 @@ app.post("/api/mypets", getPets);
 app.post("/api/pets", newPet);
 app.put("/api/pets", editPet);
 app.delete("/api/pets/:id", deletePetById);
+
+app.get("/api/services/:id", getServiceById);
+app.post("/api/services", newService);
+app.put("/api/services", editService);
+app.delete("/api/services/:id", deleteService);
+app.post("/api/myservices", getServicesById);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {

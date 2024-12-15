@@ -21,6 +21,11 @@ const VetSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+		required: true,
+	},
 });
 
 const Vet = mongoose.models.Vet || mongoose.model("Vet", VetSchema);
