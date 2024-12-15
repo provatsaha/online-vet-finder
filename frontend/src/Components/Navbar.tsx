@@ -32,13 +32,13 @@ const Navbar = () => {
 						Profile
 					</a>
 					<a
-						href="/services"
+						href="/vet-profile"
 						className="text-gray-600 hover:text-gray-800 flex items-center"
 					>
 						<span className="lg:hidden mr-2">
 							<Briefcase />
 						</span>
-						Services
+						VetProfile
 					</a>
 					<a
 						href="/contact"
@@ -82,16 +82,16 @@ const Navbar = () => {
 								className="text-gray-600 hover:text-gray-800 flex items-center"
 							>
 								<User2 className="mr-2" />
-								profile
+								Profile
 							</a>
 						</li>
 						<li>
 							<a
-								href="/services"
+								href="/vet-profile"
 								className="text-gray-600 hover:text-gray-800 flex items-center"
 							>
 								<Briefcase className="mr-2" />
-								Services
+								VetProfile
 							</a>
 						</li>
 						<li>
