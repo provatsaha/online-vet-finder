@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home/Home";
+import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar";
 import Profile from "./Components/Profile/Profile";
 import { Toaster } from "react-hot-toast";
@@ -19,45 +20,34 @@ import ViewVetProfile from "./Components/VetProfile/ViewVetProfile/ViewVetProfil
 import VetService from "./Components/VetProfile/ViewVetProfile/VetService/VetService";
 
 const App = () => {
-	return (
-		<AuthProvider>
-			<Router>
-				<Toaster />
-				<Navbar />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/profile" element={<Profile />} />
-					<Route path="/login" element={<Login />} />
-					<Route
-						path="/forgot-password"
-						element={<ForgotPassword />}
-					/>
-					<Route path="/mypets" element={<Mypets />} />
-					<Route path="/newpet" element={<NewPet />} />
-					<Route path="/editpet/:id" element={<EditPet />} />
-					<Route path="/vet-profile" element={<VetProfile />} />
-					<Route
-						path="/vet-profile/:id"
-						element={<ViewVetProfile />}
-					/>
-					<Route
-						path="/vet-profile/:id/service"
-						element={<VetService />}
-					/>
-					<Route path="/vet-profile/manage" element={<Manage />} />
-					<Route
-						path="/vet-profile/manage/new-service"
-						element={<NewService />}
-					/>
-					<Route
-						path="/vet-profile/manage/:id"
-						element={<EditService />}
-					/>
-					<Route path="/search" element={<SearchPage />} />
-				</Routes>
-			</Router>
-		</AuthProvider>
-	);
+  return (
+    <AuthProvider>
+      <Router>
+        <Toaster />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/mypets" element={<Mypets />} />
+          <Route path="/newpet" element={<NewPet />} />
+          <Route path="/editpet/:id" element={<EditPet />} />
+          <Route path="/vet-profile" element={<VetProfile />} />
+          <Route path="/vet-profile/:id" element={<ViewVetProfile />} />
+          <Route path="/vet-profile/:id/service" element={<VetService />} />
+          <Route path="/vet-profile/manage" element={<Manage />} />
+          <Route
+            path="/vet-profile/manage/new-service"
+            element={<NewService />}
+          />
+          <Route path="/vet-profile/manage/:id" element={<EditService />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
 };
 
 export default App;
