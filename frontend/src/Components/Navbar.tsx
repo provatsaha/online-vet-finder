@@ -1,5 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { Menu, Home, User2, Phone, Briefcase, LogOut } from "lucide-react";
+import {
+	Menu,
+	Home,
+	User2,
+	Phone,
+	Briefcase,
+	LogOut,
+	Search,
+} from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 
@@ -44,6 +52,12 @@ const Navbar = () => {
 					>
 						<Phone className="mr-2" /> Contact
 					</a>
+					<button
+						onClick={() => navigate("/search")}
+						className="text-gray-600 hover:text-gray-800 flex items-center"
+					>
+						<Search className="mr-2" /> Search
+					</button>
 				</div>
 
 				<div className="hidden md:block">
@@ -68,7 +82,6 @@ const Navbar = () => {
 					)}
 				</div>
 
-				{/* Mobile Menu Toggle */}
 				<button
 					title="Toggle Menu"
 					onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -78,7 +91,6 @@ const Navbar = () => {
 				</button>
 			</nav>
 
-			{/* Mobile Menu */}
 			{isMobileMenuOpen && (
 				<div className="md:hidden bg-gray-50 shadow-lg">
 					<ul className="flex flex-col space-y-2 p-4">
@@ -121,6 +133,18 @@ const Navbar = () => {
 								<Phone className="mr-2" />
 								Contact
 							</a>
+						</li>
+						<li>
+							<button
+								onClick={() => {
+									setIsMobileMenuOpen(false);
+									navigate("/search");
+								}}
+								className="w-full px-4 py-2 bg-indigo-500 text-white rounded-md shadow hover:bg-indigo-600 flex items-center justify-center"
+							>
+								<Search className="mr-2" />
+								Search
+							</button>
 						</li>
 						<li>
 							{userId ? (

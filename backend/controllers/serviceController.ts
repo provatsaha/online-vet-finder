@@ -53,3 +53,33 @@ export const deleteService = async (req: any, res: any) => {
 		res.status(500).json({ message: "Failed to delete service", error });
 	}
 };
+
+export const searchServices = async (req: any, res: any) => {
+	try {
+		const { searchText } = req.body;
+
+		if (!searchText) {
+			return res
+				.status(400)
+				.json({ message: "Search text is required." });
+		}
+
+		const services = await Service.find({
+			$or: [
+				{ name: { $regex: searchText, $options: "i" } },
+				{ description: { $regex: searchText, $options: "i" } },
+				{ "vet.name": { $regex: searchText, $options: "i" } },
+				{ "vet.location": { $regex: searchText, $options: "i" } },
+			],
+		})
+			.limit(20)
+			.populate("vet");
+
+		res.status(200).json(services);
+	} catch (error: any) {
+		res.status(500).json({
+			message: "Failed to search services",
+			error: error.message,
+		});
+	}
+};

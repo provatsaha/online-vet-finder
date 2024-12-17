@@ -13,6 +13,7 @@ import {
 	getServiceById,
 	getServicesById,
 	newService,
+	searchServices,
 } from "./controllers/serviceController";
 import {
 	deletePetById,
@@ -88,6 +89,7 @@ app.post("/api/services", newService);
 app.put("/api/services", editService);
 app.delete("/api/services/:id", deleteService);
 app.post("/api/myservices", getServicesById);
+app.post("/api/services/search", searchServices);
 
 app.post("/api/send-otp", sendOtp);
 app.post("/api/verify-otp", verifyOtp);

@@ -14,6 +14,9 @@ import EditService from "./Components/VetProfile/Manage/EditService/EditService"
 import Login from "./Components/Login/Login";
 import { AuthProvider } from "./Context/AuthContext";
 import ForgotPassword from "./Components/Login/ForgotPassword";
+import SearchPage from "./Components/Search/Search";
+import ViewVetProfile from "./Components/VetProfile/ViewVetProfile/ViewVetProfile";
+import VetService from "./Components/VetProfile/ViewVetProfile/VetService/VetService";
 
 const App = () => {
 	return (
@@ -33,6 +36,14 @@ const App = () => {
 					<Route path="/newpet" element={<NewPet />} />
 					<Route path="/editpet/:id" element={<EditPet />} />
 					<Route path="/vet-profile" element={<VetProfile />} />
+					<Route
+						path="/vet-profile/:id"
+						element={<ViewVetProfile />}
+					/>
+					<Route
+						path="/vet-profile/:id/service"
+						element={<VetService />}
+					/>
 					<Route path="/vet-profile/manage" element={<Manage />} />
 					<Route
 						path="/vet-profile/manage/new-service"
@@ -42,6 +53,7 @@ const App = () => {
 						path="/vet-profile/manage/:id"
 						element={<EditService />}
 					/>
+					<Route path="/search" element={<SearchPage />} />
 				</Routes>
 			</Router>
 		</AuthProvider>
