@@ -6,7 +6,7 @@ import cors from "cors";
 dotenv.config();
 
 import { getVetById, newVet } from "./controllers/vetController";
-import { signup, getProfileById } from "./controllers/userController";
+import { signup, getProfileById, login } from "./controllers/userController";
 import {
 	deleteService,
 	editService,
@@ -21,6 +21,11 @@ import {
 	getPets,
 	newPet,
 } from "./controllers/petController";
+import {
+	sendOtp,
+	verifyOtp,
+	setNewPassword,
+} from "./controllers/otpController";
 
 const app: Application = express();
 
@@ -70,6 +75,7 @@ const connectDB = async () => {
 app.get("/api/vets/:id", getVetById);
 app.post("/api/vets", newVet);
 app.post("/api/users", signup);
+app.post("/api/login", login);
 app.get("/api/users/:id", getProfileById);
 app.get("/api/pets/:id", getPetById);
 app.post("/api/mypets", getPets);
@@ -82,6 +88,10 @@ app.post("/api/services", newService);
 app.put("/api/services", editService);
 app.delete("/api/services/:id", deleteService);
 app.post("/api/myservices", getServicesById);
+
+app.post("/api/send-otp", sendOtp);
+app.post("/api/verify-otp", verifyOtp);
+app.post("/api/set-password", setNewPassword);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {

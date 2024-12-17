@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 interface User {
 	_id: string;
@@ -22,7 +23,7 @@ export interface Vet {
 }
 
 export default function VetProfile() {
-	const vet_id = localStorage.getItem("vet_id") || "";
+	const { vetId } = useAuth();
 	const [vet, setVet] = useState<Vet | null>(null);
 	const [loading, setLoading] = useState(true);
 
@@ -30,7 +31,7 @@ export default function VetProfile() {
 		setLoading(true);
 		try {
 			const response = await fetch(
-				`http://localhost:5000/api/vets/${vet_id}`
+				`http://localhost:5000/api/vets/${vetId}`
 			);
 			const data = await response.json();
 			if (response.ok) {
@@ -46,7 +47,7 @@ export default function VetProfile() {
 
 	useEffect(() => {
 		fetchVet();
-	}, []);
+	}, [vetId]);
 
 	if (loading) {
 		return (

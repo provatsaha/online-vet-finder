@@ -11,30 +11,40 @@ import VetProfile from "./Components/VetProfile/VetProfile";
 import Manage from "./Components/VetProfile/Manage/Manage";
 import NewService from "./Components/VetProfile/Manage/NewService/NewService";
 import EditService from "./Components/VetProfile/Manage/EditService/EditService";
+import Login from "./Components/Login/Login";
+import { AuthProvider } from "./Context/AuthContext";
+import ForgotPassword from "./Components/Login/ForgotPassword";
 
 const App = () => {
 	return (
-		<Router>
-			<Toaster />
-			<Navbar />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/profile" element={<Profile />} />
-				<Route path="/mypets" element={<Mypets />} />
-				<Route path="/newpet" element={<NewPet />} />
-				<Route path="/editpet/:id" element={<EditPet />} />
-				<Route path="/vet-profile" element={<VetProfile />} />
-				<Route path="/vet-profile/manage" element={<Manage />} />
-				<Route
-					path="/vet-profile/manage/new-service"
-					element={<NewService />}
-				/>
-				<Route
-					path="/vet-profile/manage/:id"
-					element={<EditService />}
-				/>
-			</Routes>
-		</Router>
+		<AuthProvider>
+			<Router>
+				<Toaster />
+				<Navbar />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/login" element={<Login />} />
+					<Route
+						path="/forgot-password"
+						element={<ForgotPassword />}
+					/>
+					<Route path="/mypets" element={<Mypets />} />
+					<Route path="/newpet" element={<NewPet />} />
+					<Route path="/editpet/:id" element={<EditPet />} />
+					<Route path="/vet-profile" element={<VetProfile />} />
+					<Route path="/vet-profile/manage" element={<Manage />} />
+					<Route
+						path="/vet-profile/manage/new-service"
+						element={<NewService />}
+					/>
+					<Route
+						path="/vet-profile/manage/:id"
+						element={<EditService />}
+					/>
+				</Routes>
+			</Router>
+		</AuthProvider>
 	);
 };
 
