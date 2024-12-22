@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../../Context/AuthContext";
 
 interface User {
 	_id: string;
@@ -27,6 +28,7 @@ export default function ViewVetProfile() {
 	const vetId = id;
 	const [vet, setVet] = useState<Vet | null>(null);
 	const [loading, setLoading] = useState(true);
+	const { vetId: myVetID } = useAuth();
 
 	async function fetchVet() {
 		setLoading(true);
@@ -117,6 +119,22 @@ export default function ViewVetProfile() {
 					>
 						View Services
 					</Link>
+					{myVetID !== vetId && (
+						<Link
+							to={`/rate-vet/${vetId}`}
+							className="px-6 py-2 border border-indigo-500 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition ml-4"
+						>
+							Rate Vet
+						</Link>
+					)}
+					{myVetID !== vetId && (
+						<Link
+							to={`/view-ratings/${vetId}`}
+							className="px-6 py-2 border border-indigo-500 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition ml-4"
+						>
+							View Ratings
+						</Link>
+					)}
 				</div>
 			</div>
 		</div>

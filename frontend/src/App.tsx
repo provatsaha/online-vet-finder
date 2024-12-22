@@ -18,36 +18,55 @@ import ForgotPassword from "./Components/Login/ForgotPassword";
 import SearchPage from "./Components/Search/Search";
 import ViewVetProfile from "./Components/VetProfile/ViewVetProfile/ViewVetProfile";
 import VetService from "./Components/VetProfile/ViewVetProfile/VetService/VetService";
+import Rate from "./Components/VetProfile/ViewVetProfile/Rate/Rate";
+import ViewRatings from "./Components/VetProfile/ViewVetProfile/ViewRatings/ViewRatings";
 
 const App = () => {
-  return (
-    <AuthProvider>
-      <Router>
-        <Toaster />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/mypets" element={<Mypets />} />
-          <Route path="/newpet" element={<NewPet />} />
-          <Route path="/editpet/:id" element={<EditPet />} />
-          <Route path="/vet-profile" element={<VetProfile />} />
-          <Route path="/vet-profile/:id" element={<ViewVetProfile />} />
-          <Route path="/vet-profile/:id/service" element={<VetService />} />
-          <Route path="/vet-profile/manage" element={<Manage />} />
-          <Route
-            path="/vet-profile/manage/new-service"
-            element={<NewService />}
-          />
-          <Route path="/vet-profile/manage/:id" element={<EditService />} />
-          <Route path="/search" element={<SearchPage />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+	return (
+		<AuthProvider>
+			<Router>
+				<Toaster />
+				<Navbar />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/contact" element={<Contact />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/login" element={<Login />} />
+					<Route
+						path="/forgot-password"
+						element={<ForgotPassword />}
+					/>
+					<Route path="/mypets" element={<Mypets />} />
+					<Route path="/newpet" element={<NewPet />} />
+					<Route path="/editpet/:id" element={<EditPet />} />
+					<Route path="/vet-profile" element={<VetProfile />} />
+					<Route
+						path="/vet-profile/:id"
+						element={<ViewVetProfile />}
+					/>
+					<Route
+						path="/vet-profile/:id/service"
+						element={<VetService />}
+					/>
+					<Route path="/vet-profile/manage" element={<Manage />} />
+					<Route
+						path="/vet-profile/manage/new-service"
+						element={<NewService />}
+					/>
+					<Route
+						path="/vet-profile/manage/:id"
+						element={<EditService />}
+					/>
+					<Route path="/search" element={<SearchPage />} />
+					<Route path="/rate-vet/:vet" element={<Rate />} />
+					<Route
+						path="/view-ratings/:vet"
+						element={<ViewRatings />}
+					/>
+				</Routes>
+			</Router>
+		</AuthProvider>
+	);
 };
 
 export default App;
