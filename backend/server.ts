@@ -29,6 +29,11 @@ import {
 } from "./controllers/otpController";
 
 import { newRate, getRatings } from "./controllers/RateController";
+import {
+	deleteArticle,
+	getArticle,
+	newArticle,
+} from "./controllers/ArticleController";
 
 const app: Application = express();
 
@@ -100,6 +105,10 @@ app.post("/api/set-password", setNewPassword);
 
 app.post("/api/rate", newRate);
 app.post("/api/ratings", getRatings);
+
+app.post("/api/articles", newArticle);
+app.post("/api/articles/get", getArticle);
+app.delete("/api/articles", deleteArticle);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {

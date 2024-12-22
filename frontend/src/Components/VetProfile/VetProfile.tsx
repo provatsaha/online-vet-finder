@@ -109,12 +109,18 @@ export default function VetProfile() {
 				) : (
 					<p className="text-lg text-gray-600">Vet not found</p>
 				)}
-				<div className="mt-8 flex justify-end">
+				<div className="mt-8 gap-4 flex justify-end">
 					<Link
 						to="/vet-profile/manage"
 						className="px-6 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition"
 					>
 						Manage Service Information
+					</Link>
+					<Link
+						to="/vet-profile/article"
+						className="px-6 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition"
+					>
+						Article
 					</Link>
 				</div>
 			</div>

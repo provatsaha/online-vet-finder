@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Loader2, Search } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 interface Service {
 	_id: string;
@@ -19,6 +20,7 @@ export default function SearchPage() {
 	const [searchText, setSearchText] = useState("");
 	const [services, setServices] = useState<Service[]>([]);
 	const [loading, setLoading] = useState(false);
+	const { vetId } = useAuth();
 
 	const handleSearch = async () => {
 		if (!searchText.trim()) {
@@ -96,7 +98,11 @@ export default function SearchPage() {
 									{service.description}
 								</p>
 								<Link
-									to={`/vet-profile/${service.vet._id}`}
+									to={
+										service.vet._id === vetId
+											? "/vet-profile"
+											: `/vet-profile/${service.vet._id}`
+									}
 									className="mt-2 text-indigo-500 font-semibold"
 								>
 									${service.cost} - {service.vet.name} (

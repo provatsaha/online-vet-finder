@@ -127,14 +127,18 @@ export default function ViewVetProfile() {
 							Rate Vet
 						</Link>
 					)}
-					{myVetID !== vetId && (
-						<Link
-							to={`/view-ratings/${vetId}`}
-							className="px-6 py-2 border border-indigo-500 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition ml-4"
-						>
-							View Ratings
-						</Link>
-					)}
+					<Link
+						to={`/view-ratings/${vetId}`}
+						className="px-6 py-2 border border-indigo-500 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition ml-4"
+					>
+						View Ratings
+					</Link>
+					<Link
+						to={`/view-article/${vetId}`}
+						className="px-6 py-2 border border-indigo-500 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition ml-4"
+					>
+						View Articles
+					</Link>
 				</div>
 			</div>
 		</div>
