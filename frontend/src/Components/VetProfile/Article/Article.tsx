@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { PlusCircle, Trash2 } from "lucide-react";
 import { Spin } from "antd";
 import { useAuth } from "../../../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 interface Article {
 	_id: string;
@@ -177,9 +178,12 @@ export default function Article() {
 									key={article._id}
 									className="bg-white shadow-md rounded-lg p-5 border-t-4 border-yellow-400"
 								>
-									<h2 className="text-lg font-bold text-gray-800">
+									<Link
+										to={`/article/${article._id}`}
+										className="text-lg font-bold text-gray-800 mb-2 hover:underline"
+									>
 										{article.title}
-									</h2>
+									</Link>
 									<p className="mt-2 text-gray-700">
 										{article.content.slice(0, 100)}
 										{article.content.length > 100 && "..."}

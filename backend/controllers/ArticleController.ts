@@ -33,6 +33,23 @@ export const getArticle = async (req: any, res: any) => {
 	}
 };
 
+
+export const getArticleById = async (req: any, res: any) => {
+	try {
+		const data: any = req.body;
+		if (!data) {
+			return res.status(400).json({ message: "Body is required" });
+		}
+		const article = await Article.findById(data.id).populate("vet");
+		if (!article) {
+			return res.status(404).json({ message: "Article not found" });
+		}
+		res.status(200).json(article);
+	} catch (error: any) {
+		res.status(500).json({ message: "Failed to fetch article", error });
+	}
+};
+
 export const deleteArticle = async (req: any, res: any) => {
 	try {
 		const data: any = req.body;

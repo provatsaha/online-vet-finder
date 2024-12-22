@@ -22,6 +22,7 @@ import Rate from "./Components/VetProfile/ViewVetProfile/Rate/Rate";
 import ViewRatings from "./Components/VetProfile/ViewVetProfile/ViewRatings/ViewRatings";
 import Article from "./Components/VetProfile/Article/Article";
 import VetArticle from "./Components/VetProfile/ViewVetProfile/VetArticle/VetArticle";
+import OneArticle from "./Components/Article/OneArticle";
 
 const App = () => {
 	return (
@@ -67,6 +68,7 @@ const App = () => {
 					/>
 					<Route path="/vet-profile/article" element={<Article />} />
 					<Route path="/view-article/:vet" element={<VetArticle />} />
+					<Route path="/article/:article" element={<OneArticle />} />
 				</Routes>
 			</Router>
 		</AuthProvider>

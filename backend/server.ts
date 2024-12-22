@@ -33,7 +33,13 @@ import {
 	deleteArticle,
 	getArticle,
 	newArticle,
+	getArticleById,
 } from "./controllers/ArticleController";
+import {
+	deleteComments,
+	getComments,
+	newComment,
+} from "./controllers/CommentController";
 
 const app: Application = express();
 
@@ -109,6 +115,11 @@ app.post("/api/ratings", getRatings);
 app.post("/api/articles", newArticle);
 app.post("/api/articles/get", getArticle);
 app.delete("/api/articles", deleteArticle);
+app.post("/api/articles/getArticleById", getArticleById);
+
+app.post("/api/comments", newComment);
+app.post("/api/comments/get", getComments);
+app.delete("/api/comments", deleteComments);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {

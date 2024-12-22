@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Spin } from "antd";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Article {
 	_id: string;
@@ -69,9 +70,12 @@ export default function VetArticle() {
 								key={article._id}
 								className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-yellow-400"
 							>
-								<h2 className="text-lg font-bold text-gray-800 mb-2">
+								<Link
+									to={`/article/${article._id}`}
+									className="text-lg font-bold text-gray-800 mb-2 hover:underline"
+								>
 									{article.title}
-								</h2>
+								</Link>
 								<p className="text-gray-600 mb-4">
 									{article.content.slice(0, 150)}
 									{article.content.length > 150 && "..."}
