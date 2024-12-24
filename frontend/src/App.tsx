@@ -23,6 +23,7 @@ import ViewRatings from "./Components/VetProfile/ViewVetProfile/ViewRatings/View
 import Article from "./Components/VetProfile/Article/Article";
 import VetArticle from "./Components/VetProfile/ViewVetProfile/VetArticle/VetArticle";
 import OneArticle from "./Components/Article/OneArticle";
+import { PaymentPage } from "./Components/Payment/Payment";
 
 const App = () => {
 	return (
@@ -69,6 +70,7 @@ const App = () => {
 					<Route path="/vet-profile/article" element={<Article />} />
 					<Route path="/view-article/:vet" element={<VetArticle />} />
 					<Route path="/article/:article" element={<OneArticle />} />
+					<Route path="/payment" element={<PaymentPage />} />
 				</Routes>
 			</Router>
 		</AuthProvider>
