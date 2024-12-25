@@ -4,6 +4,7 @@ import { Edit3, Trash2, Plus } from "lucide-react";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../Context/constant";
 
 interface Service {
 	_id: string;
@@ -23,7 +24,7 @@ export default function Manage() {
 		setLoading(true);
 		try {
 			const response = await fetch(
-				`http://localhost:5000/api/myservices`,
+				`${BASE_URL}/api/myservices`,
 				{
 					method: "POST",
 					headers: {
@@ -48,7 +49,7 @@ export default function Manage() {
 		if (deleteServiceId) {
 			try {
 				const response = await fetch(
-					`http://localhost:5000/api/services/${deleteServiceId}`,
+					`${BASE_URL}/api/services/${deleteServiceId}`,
 					{
 						method: "DELETE",
 					}

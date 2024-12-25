@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Star } from "lucide-react";
+import { BASE_URL } from "../../../../Context/constant";
 
 interface Rating {
 	user: { name: string; email: string };
@@ -20,7 +21,7 @@ export default function ViewRatings() {
 		async function fetchRatings() {
 			try {
 				const response = await fetch(
-					"http://localhost:5000/api/ratings",
+					`${BASE_URL}/api/ratings`,
 					{
 						method: "POST",
 						headers: { "Content-Type": "application/json" },

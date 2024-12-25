@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../Context/constant";
 
 const stripePromise = loadStripe(
 	"pk_test_51QZYpiKnNOn5akGABWkSrXEZQmfijVRJhWZvdodjc6urMbhLFj1VcVH3cioIJMShn7rGfrdKsr21nIez9NbIEOEg00Z2hVSYVx"
@@ -38,7 +39,7 @@ function Payment({ amount }: { amount: number }) {
 
 		try {
 			const response = await fetch(
-				"http://localhost:5000/api/create-payment-intent",
+				`${BASE_URL}/api/create-payment-intent`,
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },

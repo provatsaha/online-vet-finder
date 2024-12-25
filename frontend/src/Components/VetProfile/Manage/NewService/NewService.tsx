@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader2, PlusCircle } from "lucide-react";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../../../../Context/constant";
 
 export default function NewService() {
 	const vet_id = localStorage.getItem("vet_id") || "";
@@ -27,7 +28,7 @@ export default function NewService() {
 
 		setLoading(true);
 		try {
-			const response = await fetch("http://localhost:5000/api/services", {
+			const response = await fetch(`${BASE_URL}/api/services`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

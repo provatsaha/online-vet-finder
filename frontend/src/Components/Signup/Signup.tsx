@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../../Context/constant";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -19,7 +20,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/users", {
+      const response = await fetch(`${BASE_URL}/api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

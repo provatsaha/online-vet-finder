@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 import { useAuth } from "../../Context/AuthContext";
+import { BASE_URL } from "../../Context/constant";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const Login = () => {
 
 		setLoading(true);
 		try {
-			const response = await fetch("http://localhost:5000/api/login", {
+			const response = await fetch(`${BASE_URL}/api/login`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email, password }),

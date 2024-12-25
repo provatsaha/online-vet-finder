@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Spin } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../../Context/constant";
 
 interface Service {
 	_id: string;
@@ -22,7 +23,7 @@ export default function VetService() {
 		setLoading(true);
 		try {
 			const response = await fetch(
-				`http://localhost:5000/api/myservices`,
+				`${BASE_URL}/api/myservices`,
 				{
 					method: "POST",
 					headers: {
@@ -45,20 +46,17 @@ export default function VetService() {
 
 	async function handleGetAppointment(serviceId: string) {
 		try {
-			const response = await fetch(
-				`http://localhost:5000/api/appointments`,
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						vet_id,
-						user_id,
-						serviceId,
-					}),
-				}
-			);
+			const response = await fetch(`${BASE_URL}/api/appointments`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					vet_id,
+					user_id,
+					serviceId,
+				}),
+			});
 
 			const data = await response.json();
 

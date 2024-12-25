@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../Context/constant";
 
 export default function ForgotPassword() {
 	const [step, setStep] = useState(1);
@@ -18,7 +19,7 @@ export default function ForgotPassword() {
 		}
 		setLoading(true);
 		try {
-			const response = await fetch("http://localhost:5000/api/send-otp", {
+			const response = await fetch(`${BASE_URL}/api/send-otp`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email }),
@@ -43,14 +44,11 @@ export default function ForgotPassword() {
 		}
 		setLoading(true);
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/verify-otp",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ email, otp }),
-				}
-			);
+			const response = await fetch(`${BASE_URL}/api/verify-otp`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ email, otp }),
+			});
 			const data = await response.json();
 			if (response.ok) {
 				toast.success("OTP verified.");
@@ -71,14 +69,11 @@ export default function ForgotPassword() {
 		}
 		setLoading(true);
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/set-password",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ email, newPassword }),
-				}
-			);
+			const response = await fetch(`${BASE_URL}/api/set-password`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ email, newPassword }),
+			});
 			const data = await response.json();
 			if (response.ok) {
 				toast.success("Password reset successfully.");

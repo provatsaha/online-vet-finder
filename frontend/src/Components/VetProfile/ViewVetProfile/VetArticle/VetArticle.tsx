@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { Spin } from "antd";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../../Context/constant";
 
 interface Article {
 	_id: string;
@@ -19,14 +20,11 @@ export default function VetArticle() {
 	async function fetchArticles() {
 		setLoading(true);
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/articles/get",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ vet }),
-				}
-			);
+			const response = await fetch(`${BASE_URL}/api/articles/get`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ vet }),
+			});
 
 			const data = await response.json();
 

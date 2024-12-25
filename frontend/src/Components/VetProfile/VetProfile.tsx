@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import { BASE_URL } from "../../Context/constant";
 
 interface User {
 	_id: string;
@@ -30,9 +31,7 @@ export default function VetProfile() {
 	async function fetchVet() {
 		setLoading(true);
 		try {
-			const response = await fetch(
-				`http://localhost:5000/api/vets/${vetId}`
-			);
+			const response = await fetch(`${BASE_URL}/api/vets/${vetId}`);
 			const data = await response.json();
 			if (response.ok) {
 				setVet(data);
