@@ -4,6 +4,7 @@ import { PlusCircle, Trash2 } from "lucide-react";
 import { Spin } from "antd";
 import { useAuth } from "../../../Context/AuthContext";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../Context/constant";
 
 interface Article {
 	_id: string;
@@ -21,14 +22,11 @@ export default function Article() {
 	async function fetchArticles() {
 		setLoading(true);
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/articles/get",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ vet }),
-				}
-			);
+			const response = await fetch(`${BASE_URL}/api/articles/get`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ vet }),
+			});
 
 			const data = await response.json();
 
@@ -62,7 +60,7 @@ export default function Article() {
 		}
 
 		try {
-			const response = await fetch("http://localhost:5000/api/articles", {
+			const response = await fetch(`${BASE_URL}/api/articles`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ ...formData, vet }),
@@ -84,7 +82,7 @@ export default function Article() {
 
 	async function handleDeleteArticle(id: string) {
 		try {
-			const response = await fetch("http://localhost:5000/api/articles", {
+			const response = await fetch(`${BASE_URL}/api/articles`, {
 				method: "DELETE",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ id }),

@@ -4,6 +4,7 @@ import { Spin } from "antd";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { Trash2 } from "lucide-react";
+import { BASE_URL } from "../../Context/constant";
 
 interface Vet {
 	_id: string;
@@ -43,7 +44,7 @@ export default function OneArticle() {
 		setLoading(true);
 		try {
 			const response = await fetch(
-				"http://localhost:5000/api/articles/getArticleById",
+				`${BASE_URL}/api/articles/getArticleById`,
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -66,14 +67,11 @@ export default function OneArticle() {
 
 	async function fetchComments() {
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/comments/get",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ article }),
-				}
-			);
+			const response = await fetch(`${BASE_URL}/api/comments/get`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ article }),
+			});
 
 			const data = await response.json();
 
@@ -96,7 +94,7 @@ export default function OneArticle() {
 		}
 
 		try {
-			const response = await fetch("http://localhost:5000/api/comments", {
+			const response = await fetch(`${BASE_URL}/api/comments`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -122,7 +120,7 @@ export default function OneArticle() {
 
 	async function handleDeleteComment(id: string) {
 		try {
-			const response = await fetch("http://localhost:5000/api/comments", {
+			const response = await fetch(`${BASE_URL}/api/comments`, {
 				method: "DELETE",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ id }),

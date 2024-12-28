@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Edit3, Trash2, PlusCircle } from "lucide-react";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../Context/constant";
 
 interface Pet {
 	_id: string;
@@ -26,7 +27,7 @@ export default function Mypets() {
 	async function fetchPets() {
 		setLoading(true);
 		try {
-			const response = await fetch(`http://localhost:5000/api/mypets`, {
+			const response = await fetch(`${BASE_URL}/api/mypets`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -52,12 +53,9 @@ export default function Mypets() {
 	async function deletePet(id: string) {
 		setLoading(true);
 		try {
-			const response = await fetch(
-				`http://localhost:5000/api/pets/${id}`,
-				{
-					method: "DELETE",
-				}
-			);
+			const response = await fetch(`${BASE_URL}/api/pets/${id}`, {
+				method: "DELETE",
+			});
 			const data = await response.json();
 			if (response.ok) {
 				toast.success(data.message);

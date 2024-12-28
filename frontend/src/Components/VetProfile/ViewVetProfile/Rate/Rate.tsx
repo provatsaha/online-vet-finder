@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../Context/AuthContext";
 import { toast } from "react-hot-toast";
 import { Star, Send } from "lucide-react";
+import { BASE_URL } from "../../../../Context/constant";
 
 export default function Rate() {
 	const { vet } = useParams();
@@ -23,7 +24,7 @@ export default function Rate() {
 
 		setLoading(true);
 		try {
-			const response = await fetch("http://localhost:5000/api/rate", {
+			const response = await fetch(`${BASE_URL}/api/rate`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

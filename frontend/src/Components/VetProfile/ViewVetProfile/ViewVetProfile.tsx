@@ -4,6 +4,7 @@ import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../../Context/AuthContext";
+import { BASE_URL } from "../../../Context/constant";
 
 interface User {
 	_id: string;
@@ -34,7 +35,7 @@ export default function ViewVetProfile() {
 		setLoading(true);
 		try {
 			const response = await fetch(
-				`http://localhost:5000/api/vets/${vetId}`
+				`${BASE_URL}/api/vets/${vetId}`
 			);
 			const data = await response.json();
 			if (response.ok) {

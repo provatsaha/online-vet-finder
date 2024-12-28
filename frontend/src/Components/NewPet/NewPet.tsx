@@ -13,6 +13,7 @@ import {
 	Group,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../Context/constant";
 
 interface Pet {
 	name: string;
@@ -89,7 +90,7 @@ export default function NewPet() {
 			return;
 		}
 		try {
-			const response = await fetch("http://localhost:5000/api/pets", {
+			const response = await fetch(`${BASE_URL}/api/pets`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Loader2, Save } from "lucide-react";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../../../../Context/constant";
 
 export default function EditService() {
 	const vet_id = localStorage.getItem("vet_id") || "";
@@ -17,7 +18,7 @@ export default function EditService() {
 	async function fetchService() {
 		try {
 			const response = await fetch(
-				`http://localhost:5000/api/services/${id}`
+				`${BASE_URL}/api/services/${id}`
 			);
 			const data = await response.json();
 			if (response.ok) {
@@ -53,7 +54,7 @@ export default function EditService() {
 
 		setLoading(true);
 		try {
-			const response = await fetch("http://localhost:5000/api/services", {
+			const response = await fetch(`${BASE_URL}/api/services`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",

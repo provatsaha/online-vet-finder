@@ -1,9 +1,11 @@
-// models/Appointment.js
-//const mongoose = require("mongoose");
 import mongoose from "mongoose";
 
 const appointmentSchema = new mongoose.Schema({
-  vet_id: { type: mongoose.Schema.Types.ObjectId, ref: "Vet", required: true },
+  vet_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Vet",
+    required: true,
+  },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User ",

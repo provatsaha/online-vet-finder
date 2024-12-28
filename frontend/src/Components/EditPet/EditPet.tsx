@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
+import { BASE_URL } from "../../Context/constant";
 
 interface Pet {
 	_id: string;
@@ -51,9 +52,7 @@ export default function EditPet() {
 	async function fetchPet() {
 		setLoading(true);
 		try {
-			const response = await fetch(
-				`http://localhost:5000/api/pets/${id}`
-			);
+			const response = await fetch(`${BASE_URL}/api/pets/${id}`);
 			const data = await response.json();
 			if (response.ok) {
 				data.owner = data.owner._id;
@@ -124,7 +123,7 @@ export default function EditPet() {
 		}
 		formData.owner = localStorage.getItem("user_id") || "";
 		try {
-			const response = await fetch("http://localhost:5000/api/pets", {
+			const response = await fetch(`${BASE_URL}/api/pets`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",

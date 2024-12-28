@@ -1,6 +1,8 @@
 // import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="h-screen-no-nav bg-gray-100 p-4">
       <header className="text-center py-8">
@@ -91,7 +93,10 @@ export default function Home() {
           Sign up now to find the best veterinarians near you and ensure your
           pet's health and happiness.
         </p>
-        <button className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+        <button
+          onClick={() => navigate("/signup")}
+          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+        >
           Sign Up
         </button>
       </section>

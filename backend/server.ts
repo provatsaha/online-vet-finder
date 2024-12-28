@@ -1,4 +1,5 @@
 import express, { Application, Request, Response, NextFunction } from "express";
+import Stripe from "stripe";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -85,6 +86,29 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2024-12-18.acacia",
+});
+
+// API to create payment intent
+app.post("/api/create-payment-intent", async (req, res) => {
+  const { amount } = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount, // Amount in cents
+      currency: "usd",
+      automatic_payment_methods: { enabled: true },
+    });
+
+    res.status(200).json({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Define appointment routes
 app.post("/api/appointments", createAppointment);
