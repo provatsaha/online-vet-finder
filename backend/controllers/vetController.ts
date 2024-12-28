@@ -33,3 +33,25 @@ export const newVet = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to create vet", error });
   }
 };
+
+//for showing in emergency appointment
+export const getVetsByLocation = async (req: Request, res: Response) => {
+  try {
+    const { location } = req.query;
+
+    if (!location) {
+      return res.status(400).json({ message: "Location is required" });
+    }
+
+    const vets = await Vet.find({ location });
+    if (vets.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No vets found at this location" });
+    }
+
+    res.status(200).json(vets);
+  } catch (error: any) {
+    res.status(500).json({ message: "Failed to fetch vets", error });
+  }
+};
