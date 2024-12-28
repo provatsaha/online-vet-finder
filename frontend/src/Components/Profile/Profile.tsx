@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BASE_URL } from "../../Context/constant";
+import { useNavigate } from "react-router-dom";
 
 interface User {
   _id: string;
@@ -10,43 +11,16 @@ interface User {
   createdAt: Date;
 }
 
-interface Appointment {
-  _id: string; // MongoDB document ID
-  vet_id: {
-    _id: string;
-    name: string; // Name of the vet (populated field)
-  };
-  user_id: string; // ID of the user
-  serviceId: {
-    _id: string;
-    name: string; // Name of the service (populated field)
-    cost: number; // Cost of the service (populated field)
-  };
-  createdAt: Date; // Creation date of the appointment
-  name: string; // Name of the service
-  price: number; // Price of the service
-}
-
 export default function Profile() {
   const user_id = localStorage.getItem("user_id");
   const [user, setUser] = useState<User | null>(null);
-  const [appointments, setAppointments] = useState<Appointment[] | null>(null);
-  const [showAppointments, setShowAppointments] = useState(false);
+  const navigate = useNavigate();
 
   async function fetchProfile() {
     const response = await fetch(`${BASE_URL}/api/users/${user_id}`);
     const data = await response.json();
     if (response.ok) {
       setUser(data);
-    } else {
-      toast.error(data.message);
-    }
-  }
-  async function fetchAppointments() {
-    const response = await fetch(`${BASE_URL}/api/appointments/${user_id}`);
-    const data = await response.json();
-    if (response.ok) {
-      setAppointments(data);
     } else {
       toast.error(data.message);
     }
@@ -74,45 +48,19 @@ export default function Profile() {
               My pets
             </a>
             <button
-              onClick={() => {
-                setShowAppointments(!showAppointments);
-                if (!showAppointments) fetchAppointments();
-              }}
+              onClick={() => navigate("/emergency-appointment")}
+              className="mt-4 w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Find Emergency Appointment
+            </button>
+
+            {/* Appointment History Button (Redirect) */}
+            <button
+              onClick={() => navigate("/appointment-history")}
               className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             >
-              {showAppointments
-                ? "Hide Appointment History"
-                : "Appointment History"}
+              View Appointment History
             </button>
-            {showAppointments && appointments && (
-              <div className="mt-4">
-                <h2 className="text-xl font-semibold mb-2">
-                  Appointment History
-                </h2>
-                {appointments.length > 0 ? (
-                  <ul className="space-y-4">
-                    {appointments.map((appointment) => (
-                      <li
-                        key={appointment._id}
-                        className="p-4 bg-gray-50 border rounded"
-                      >
-                        <p className="font-semibold">
-                          Service: {appointment.serviceId.name}
-                        </p>
-                        <p>Vet: {appointment.vet_id.name}</p>
-                        <p>Price: ${appointment.serviceId.cost}</p>
-                        <p>
-                          Date:{" "}
-                          {new Date(appointment.createdAt).toLocaleDateString()}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-gray-500">No appointments found.</p>
-                )}
-              </div>
-            )}
           </div>
         ) : (
           <p className="text-center text-gray-500">Loading...</p>

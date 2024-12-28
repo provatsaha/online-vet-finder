@@ -25,6 +25,8 @@ import Article from "./Components/VetProfile/Article/Article";
 import VetArticle from "./Components/VetProfile/ViewVetProfile/VetArticle/VetArticle";
 import OneArticle from "./Components/Article/OneArticle";
 import { PaymentPage } from "./Components/Payment/Payment";
+import EmergencyAppointment from "./Components/EmergencyAppointment/EmergencyAppointmen";
+import AppointmentHistory from "./Components/AppointmentHistory/AppointmentHistory";
 
 const App = () => {
   return (
@@ -33,6 +35,11 @@ const App = () => {
         <Toaster />
         <Navbar />
         <Routes>
+          <Route
+            path="/emergency-appointment"
+            element={<EmergencyAppointment />}
+          />
+          <Route path="appointment-history" element={<AppointmentHistory />} />
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
