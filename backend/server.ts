@@ -6,10 +6,13 @@ import cors from "cors";
 
 dotenv.config();
 // Importing appointment functions
-import { createAppointment } from "./controllers/AppointmentController";
-import { getUserAppointments } from "./controllers/AppointmentController";
+import { createAppointment, getUserAppointments, getVetAppointments } from "./controllers/AppointmentController";
 
-import { getVetById, newVet, editVet } from "./controllers/vetController";
+// Importing payment functions
+import { createPayment, getUserPayments, updatePaymentStatus } from "./controllers/PaymentController";
+import { addPaymentCard, getUserPaymentCards, updatePaymentCard, deletePaymentCard, setDefaultPaymentCard } from "./controllers/PaymentCardController";
+
+import { getVetById, newVet, editVet, searchVets } from "./controllers/vetController";
 import { signup, getProfileById, login } from "./controllers/userController";
 import {
   deleteService,
@@ -44,6 +47,8 @@ import {
   getComments,
   newComment,
 } from "./controllers/CommentController";
+import { getEmergencyVet } from "./controllers/EmergencyController";
+// Key management utilities are imported as needed
 
 const app: Application = express();
 
@@ -113,7 +118,22 @@ app.post("/api/create-payment-intent", async (req, res) => {
 // Define appointment routes
 app.post("/api/appointments", createAppointment);
 app.get("/api/appointments/:user_id", getUserAppointments);
+app.get("/api/appointments/vet/:vet_id", getVetAppointments);
 
+// Define payment routes
+app.post("/api/payments", createPayment);
+app.get("/api/payments/:user_id", getUserPayments);
+app.put("/api/payments/:payment_id", updatePaymentStatus);
+
+// Define payment card routes
+app.post("/api/payment-cards", addPaymentCard);
+app.get("/api/payment-cards/:user_id", getUserPaymentCards);
+app.put("/api/payment-cards/:card_id", updatePaymentCard);
+app.delete("/api/payment-cards/:card_id", deletePaymentCard);
+app.put("/api/payment-cards/:card_id/default", setDefaultPaymentCard);
+
+app.get("/api/vets/emergency", getEmergencyVet);
+app.post("/api/vets/search", searchVets);
 app.get("/api/vets/:id", getVetById);
 app.post("/api/vets", newVet);
 app.post("/api/users", signup);
@@ -153,4 +173,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {
   await connectDB();
   console.log(`Server running on port ${PORT}`);
+  console.log("🔐 RSA Key Management System initialized - keys stored in MongoDB");
 });

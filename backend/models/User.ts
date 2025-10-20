@@ -8,15 +8,28 @@ const UserSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
-	},
+		unique: true,
+	}, // plaintext
 	address: {
 		type: String,
 		required: true,
 	},
-	password: {
+	passwordHash: {
 		type: String,
 		required: true,
 	},
+	salt: {
+		type: String,
+		required: true,
+	},
+	nonce: {
+		type: String,
+		required: true,
+	},
+	   publicKey: {
+		   type: String,
+		   required: false,
+	   }, // AES-encrypted PEM format, for encrypting data for this user
 	createdAt: {
 		type: Date,
 		default: Date.now,

@@ -25,8 +25,10 @@ import Article from "./Components/VetProfile/Article/Article";
 import VetArticle from "./Components/VetProfile/ViewVetProfile/VetArticle/VetArticle";
 import OneArticle from "./Components/Article/OneArticle";
 import { PaymentPage } from "./Components/Payment/Payment";
+import PaymentCardManager from "./Components/PaymentCards/PaymentCardManager";
 import EmergencyAppointment from "./Components/EmergencyAppointment/EmergencyAppointmen";
 import AppointmentHistory from "./Components/AppointmentHistory/AppointmentHistory";
+import VetAppointmentHistory from "./Components/VetProfile/VetAppointmentHistory";
 
 const App = () => {
   return (
@@ -54,6 +56,10 @@ const App = () => {
           <Route path="/vet-profile/:id/service" element={<VetService />} />
           <Route path="/vet-profile/manage" element={<Manage />} />
           <Route
+            path="/vet-profile/appointments"
+            element={<VetAppointmentHistory />}
+          />
+          <Route
             path="/vet-profile/manage/new-service"
             element={<NewService />}
           />
@@ -65,6 +71,7 @@ const App = () => {
           <Route path="/view-article/:vet" element={<VetArticle />} />
           <Route path="/article/:article" element={<OneArticle />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment-cards" element={<PaymentCardManager />} />
         </Routes>
       </Router>
     </AuthProvider>

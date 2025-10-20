@@ -9,10 +9,11 @@ const VetSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	specialization: {
-		type: String,
-		required: true,
-	},
+	   specialization: {
+		   type: String,
+		   required: false,
+		   default: "General",
+	   },
 	certifications: {
 		type: [String],
 		default: [],

@@ -106,8 +106,7 @@ export default function SearchPage() {
 									}
 									className="mt-2 text-indigo-500 font-semibold"
 								>
-									${service.cost} - {service.vet.name} (
-									{service.vet.location})
+									${service.cost} 
 								</Link>
 							</div>
 						))}

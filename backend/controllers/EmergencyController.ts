@@ -1,26 +1,52 @@
 import { Request, Response } from "express";
 import Vet from "../models/Vet";
 import User from "../models/User";
+import { getPublicKey, getPrivateKey } from "../utils/keyManager";
+import { aesDecrypt } from "../utils/aesUtils";
+import { rsaDecrypt } from "../utils/cryptoUtils";
 
 // Emergency Appointment Endpoint
-export const getEmergencyVet = async (req: Request, res: Response) => {
+export const getEmergencyVet = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Fetch user address from query params
-    const { address } = req.query;
-
+    // Fetch user address from query params (support both query and body for flexibility)
+    const address = req.query.address || req.body.address;
     if (!address) {
-      return res.status(400).json({ message: "User address is required" });
+      res.status(400).json({ message: "User address is required" });
+      return;
     }
-
-    // Find vets matching the user's address
-    const vets = await Vet.find({ location: address });
-
-    if (vets.length > 0) {
-      // Return the first matched vet
-      return res.status(200).json({ message: "Vet found", vets });
+    // Fetch all vets and decrypt their locations
+    const vets = await Vet.find({}).populate("user");
+    const matchingVets = [];
+    const searchAddress = (address as string).trim().toLowerCase();
+    console.log("Searching for address:", searchAddress);
+    for (const vet of vets) {
+      const user = vet.user;
+      const privateKey = await getPrivateKey(user._id.toString());
+      if (!privateKey) continue;
+      let decryptedLocation = "";
+      try {
+        decryptedLocation = rsaDecrypt(vet.location, privateKey).trim().toLowerCase();
+      } catch {
+        continue;
+      }
+      console.log(`Vet: ${vet._id}, Decrypted Location: '${decryptedLocation}'`);
+      if (decryptedLocation.includes(searchAddress)) {
+        matchingVets.push({
+          _id: vet._id,
+          name: rsaDecrypt(vet.name, privateKey),
+          location: decryptedLocation,
+          specialization: vet.specialization,
+          certifications: vet.certifications,
+          createdAt: vet.createdAt,
+          user: vet.user
+        });
+      }
+    }
+    console.log("Matching vets:", matchingVets.length);
+    if (matchingVets.length > 0) {
+      res.status(200).json({ message: "Vet found", vets: matchingVets });
     } else {
-      // No vets found, return fallback information
-      return res.status(404).json({
+      res.status(404).json({
         message: "No vets available in your location",
         emergencyTips: [
           "Keep your pet calm and comfortable.",

@@ -8,7 +8,7 @@ const appointmentSchema = new mongoose.Schema({
   },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User ",
+    ref: "User",
     required: true,
   },
   serviceId: {
@@ -19,6 +19,8 @@ const appointmentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   name: { type: String, required: true }, // Name of the service
   price: { type: Number, required: true }, // Price of the service
+  notes: { type: String }, // Sensitive, encrypt
+  symptoms: { type: String }, // Sensitive, encrypt
 });
 
 // Create the Appointment model

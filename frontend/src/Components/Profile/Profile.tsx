@@ -61,6 +61,14 @@ export default function Profile() {
             >
               View Appointment History
             </button>
+
+            {/* Payment Cards Management Button */}
+            <button
+              onClick={() => navigate("/payment-cards")}
+              className="mt-4 w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Manage Payment Cards
+            </button>
           </div>
         ) : (
           <p className="text-center text-gray-500">Loading...</p>
